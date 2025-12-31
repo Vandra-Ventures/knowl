@@ -1,22 +1,36 @@
 # Knowl
 
-Download the latest release for your platform from the [Releases](https://github.com/Vandra-Ventures/knowl/releases) page.
+Download the latest release from the [Releases](https://github.com/Vandra-Ventures/knowl/releases) page.
 
 ## Installation (macOS)
 
-1. Download the ZIP file for your Mac:
-   - Apple Silicon (M1/M2/M3): `Knowl-*-arm64-mac.zip`
-   - Intel: `Knowl-*-mac.zip`
+The app isn't notarized yet, so you need to run these commands in Terminal after downloading.
 
-2. Extract the ZIP (double-click it)
+### Option 1: One-liner (recommended)
 
-3. Open Terminal and run this command:
-   ```bash
-   xattr -cr ~/Downloads/Knowl.app && codesign --force --deep --sign - ~/Downloads/Knowl.app
-   ```
+Copy and paste this into Terminal:
 
-4. Drag Knowl to your Applications folder (optional)
+```bash
+# For Apple Silicon (M1/M2/M3)
+cd /tmp && curl -L -o Knowl.zip "https://github.com/Vandra-Ventures/knowl/releases/latest/download/Knowl-0.1.0-arm64-mac.zip" && unzip -o Knowl.zip && xattr -cr Knowl.app && codesign --force --deep --sign - Knowl.app && mv Knowl.app /Applications/ && rm Knowl.zip && open /Applications/Knowl.app
+```
 
-5. Double-click to open!
+```bash
+# For Intel Macs
+cd /tmp && curl -L -o Knowl.zip "https://github.com/Vandra-Ventures/knowl/releases/latest/download/Knowl-0.1.0-mac.zip" && unzip -o Knowl.zip && xattr -cr Knowl.app && codesign --force --deep --sign - Knowl.app && mv Knowl.app /Applications/ && rm Knowl.zip && open /Applications/Knowl.app
+```
 
-> **Note:** The app is not yet notarized with Apple, so this manual step is required for now.
+### Option 2: If you already downloaded from browser
+
+If you downloaded the ZIP from your browser to Downloads:
+
+```bash
+rm -rf /tmp/Knowl.app
+unzip -o ~/Downloads/Knowl-*-mac.zip -d /tmp/
+xattr -cr /tmp/Knowl.app
+codesign --force --deep --sign - /tmp/Knowl.app
+mv /tmp/Knowl.app /Applications/
+open /Applications/Knowl.app
+```
+
+> **Note:** We're working on proper code signing. This manual step will go away in a future release.
